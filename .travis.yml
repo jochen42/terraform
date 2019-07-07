@@ -1,8 +1,10 @@
+language: bash
+
 services:
   - docker
 
 deploy:
   provider: script
-  script: bash dist/travis/docker_push
+  script: bash dist/travis/buildAndPush.sh
   on:
     branch: master

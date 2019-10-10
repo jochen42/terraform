@@ -4,7 +4,7 @@ set -x
 set -e
 
 IMAGE_BASE=jochen42/terraform
-declare -a TERRAFORM_VERSIONS=("0.11.13" "0.12.3")
+declare -a TERRAFORM_VERSIONS=("0.11.14" "0.12.10")
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 

@@ -8,6 +8,14 @@ RUN go version
 RUN apk add --no-cache git curl unzip build-base
 RUN mkdir -p /root/.terraform.d/plugins/linux_amd64
 
+# aws plugin
+RUN go get -v github.com/terraform-providers/terraform-provider-aws
+RUN cp $GOPATH/bin/terraform-provider-aws /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-aws_v$(date +%Y.%m.%d)
+
+# vault plugin
+RUN go get -v github.com/terraform-providers/terraform-provider-vault
+RUN cp $GOPATH/bin/terraform-provider-vault /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-vault_v$(date +%Y.%m.%d)
+
 # pingdom plugin
 RUN go get -v github.com/russellcardullo/terraform-provider-pingdom
 RUN cp $GOPATH/bin/terraform-provider-pingdom /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-pingdom_v$(date +%Y.%m.%d)
@@ -30,7 +38,11 @@ RUN cp $GOPATH/bin/terraform-provider-kibana /root/.terraform.d/plugins/$(uname 
 
 # pass/gopass
 RUN go get -v github.com/camptocamp/terraform-provider-pass
-RUN cp $GOPATH/bin/terraform-provider-pass /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-pass_v$(date +%Y.%m.%d)
+RUN cp $GOPATH/bin/terraform-provider-pass /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-sops_v$(date +%Y.%m.%d)
+
+# mozilla sops
+RUN go get -v github.com/carlpett/terraform-provider-sops
+RUN cp $GOPATH/bin/terraform-provider-sops /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-pass_v$(date +%Y.%m.%d)
 
 # terraform bin
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip

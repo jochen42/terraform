@@ -10,11 +10,17 @@
 - dead man's snitch github.com/kevholditch/terraform-provider-dmsnitch
 - kibana - github.com/ewilde/terraform-provider-kibana
 - pass/gopass - camptocamp/terraform-provider-pass
+- mozilla sops - github.com/carlpett/terraform-provider-sops
+- elasticsearch - phillbaker/terraform-provider-elasticsearch
 
 ## Current supported terraform-versions
 
-- 0.12.3
-- 0.11.13
+- 0.12.19
+- 0.11.14
+
+## Current golang version
+
+- 0.13
 
 ## pipeline
 

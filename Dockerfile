@@ -1,6 +1,6 @@
 ####
 # builder-stage
-FROM golang:1.12-alpine as builder
+FROM golang:1.13-alpine as builder
 ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION ${TERRAFORM_VERSION:-}
 
@@ -42,7 +42,7 @@ RUN cp $GOPATH/bin/terraform-provider-pass /root/.terraform.d/plugins/$(uname | 
 
 # mozilla sops
 RUN go get -v github.com/carlpett/terraform-provider-sops
-RUN cp $GOPATH/bin/terraform-provider-sops /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-pass_v$(date +%Y.%m.%d)
+RUN cp $GOPATH/bin/terraform-provider-sops /root/.terraform.d/plugins/$(uname | tr '[:upper:]' '[:lower:]')_amd64/terraform-provider-sops_v$(date +%Y.%m.%d)
 
 # terraform bin
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
@@ -50,7 +50,7 @@ RUN unzip /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin
 
 ###
 # final image stage
-FROM golang:1.12-alpine
+FROM golang:1.13-alpine
 ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION ${TERRAFORM_VERSION:-}
 
